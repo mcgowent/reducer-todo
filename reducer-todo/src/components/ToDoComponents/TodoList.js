@@ -10,7 +10,9 @@ import TodoForm from './TodoForm';
 
 
 const TodoList = props => {
+
     const [state, dispatch] = useReducer(theReducer, initialState);
+
     console.log(state)
     return (
         <div className="task-list">

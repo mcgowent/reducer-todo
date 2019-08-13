@@ -6,7 +6,6 @@ import "./App.css";
 
 
 const App = () => {
-  const [toDoList, setToDoList] = useState({})
 
   const [state, dispatch] = useReducer(theReducer, initialState);
 
@@ -16,13 +15,7 @@ const App = () => {
 
 
   const addItem = itemTask => {
-    const newItem = {
-      task: itemTask,
-      id: Date.now(),
-      completed: false
-    }
-    console.log(newItem)
-    dispatch({ type: 'ADD_ITEM', payload: newItem })
+    dispatch({ type: 'ADD_ITEM', payload: itemTask })
   }
 
   const clearFinished = () => {

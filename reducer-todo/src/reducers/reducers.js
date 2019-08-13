@@ -32,7 +32,11 @@ export const theReducer = (state, action) => {
         case "ADD_ITEM":
             return {
                 ...state,
-                todoItems: [...state.todoItems, action.payload]
+                todoItems: {
+                    item: action.payload,
+                    id: Date.now(),
+                    completed: false
+                }
             }
         default:
             return state;
