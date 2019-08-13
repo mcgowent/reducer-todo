@@ -17,7 +17,6 @@ const TodoForm = (props) => {
         })
     };
 
-
     return (
         <form className="sameLine" onSubmit={submitItem}>
             <input

@@ -1,42 +1,19 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useReducer } from 'react'
 import TodoList from './components/ToDoComponents/TodoList'
-// import TodoForm from './components/TodoComponents/TodoForm'
 
+import { initialState, theReducer } from './reducers/reducers'
 import "./App.css";
 
 
 const App = () => {
-  const [toDoList, setToDoList] = useState([
-    {
-      task: 'Sameple Task_2',
-      id: 1528817084358,
-      completed: false
-    },
-    {
-      task: 'Sameple Task_2',
-      id: 1528817084358,
-      completed: true
-    }
-  ])
+  const [toDoList, setToDoList] = useState({})
+
+  const [state, dispatch] = useReducer(theReducer, initialState);
 
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
-  const toggleItem = id => {
-    setToDoList(
-      toDoList.map(item => {
-        if (item.id === id) {
-          return {
-            ...item,
-            completed: !item.completed
-          }
-        } else {
-          return item
-        }
-      })
-    )
-  }
+
 
   const addItem = itemTask => {
     const newItem = {
@@ -44,7 +21,8 @@ const App = () => {
       id: Date.now(),
       completed: false
     }
-    setToDoList([...toDoList, newItem])
+    console.log(newItem)
+    dispatch({ type: 'ADD_ITEM', payload: newItem })
   }
 
   const clearFinished = () => {
@@ -61,7 +39,6 @@ const App = () => {
         <TodoList
           clearFinished={clearFinished}
           toDoList={toDoList}
-          toggleItem={toggleItem}
           addItem={addItem}
         />
 
