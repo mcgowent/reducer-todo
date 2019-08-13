@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import TodoList from './components/ToDoComponents/TodoList'
 // import TodoForm from './components/TodoComponents/TodoForm'
@@ -7,20 +7,25 @@ import "./App.css";
 
 
 const App = () => {
-
-
-  const [toDoList, setToDoList] = useState([{
-    task: 'Sameple Task_2',
-    id: 1528817084358,
-    completed: false
-  }])
+  const [toDoList, setToDoList] = useState([
+    {
+      task: 'Sameple Task_2',
+      id: 1528817084358,
+      completed: false
+    },
+    {
+      task: 'Sameple Task_2',
+      id: 1528817084358,
+      completed: true
+    }
+  ])
 
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
   const toggleItem = id => {
-    setToDoList({
-      toDoList: toDoList.map(item => {
+    setToDoList(
+      toDoList.map(item => {
         if (item.id === id) {
           return {
             ...item,
@@ -30,7 +35,7 @@ const App = () => {
           return item
         }
       })
-    })
+    )
   }
 
   const addItem = itemTask => {
@@ -39,15 +44,11 @@ const App = () => {
       id: Date.now(),
       completed: false
     }
-    setToDoList({
-      toDoList: [...toDoList, newItem], todo: ""
-    })
+    setToDoList([...toDoList, newItem])
   }
 
   const clearFinished = () => {
-    setToDoList({
-      toDoList: toDoList.filter(item => !item.completed)
-    })
+    setToDoList(toDoList.filter(item => !item.completed))
   }
 
   return (
