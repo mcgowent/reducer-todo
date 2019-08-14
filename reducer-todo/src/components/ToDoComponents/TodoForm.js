@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 
 const TodoForm = (props) => {
-    const [state, setState] = useState({ item: '' })
+    const [newToDo, setNewToDo] = useState('')
 
     const handleChanges = e => {
-        setState({
-            [e.target.name]: e.target.value
-        });
+        setNewToDo(e.target.value);
     };
 
     const submitItem = e => {
         e.preventDefault();
-        props.addItem(state.item);
-        setState({
-            item: ''
-        })
+        if (newToDo !== '') {
+            props.dispatch({ type: 'ADD_ITEM', payload: newToDo })
+            setNewToDo('')
+        }
     };
 
     return (
         <form className="sameLine" onSubmit={submitItem}>
             <input
                 type="text"
-                value={state.item}
+                value={newToDo}
                 name="item"
                 onChange={handleChanges}
             />

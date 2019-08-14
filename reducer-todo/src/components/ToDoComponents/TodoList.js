@@ -1,28 +1,18 @@
-// your components will all go in this `component` directory.
-// feel free to change this component.js into TodoList.js
-
-import React, { useReducer } from 'react';
-
-import { initialState, theReducer } from '../../reducers/reducers'
+import React from 'react';
 
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 
-
-const TodoList = props => {
-
-    const [state, dispatch] = useReducer(theReducer, initialState);
-
-    console.log(state)
+const TodoList = ({ dispatch, state }) => {
     return (
         <div className="task-list">
             {state.todoItems.map(item => (
-                <Todo key={item.id} item={item} />
+                <Todo key={item.id} item={item} dispatch={dispatch} />
             ))}
             <div className="sameLine">
-                <TodoForm addItem={props.addItem} />
+                <TodoForm dispatch={dispatch} />
 
-                <button className="clear-btn" onClick={props.clearFinished}>
+                <button className="clear-btn" onClick={() => dispatch({ type: 'CLEAR_TODO' })}>
                     Clear Finished
       </button>
             </div>
